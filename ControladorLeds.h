@@ -1,12 +1,8 @@
 #ifndef _CONTROLADOR_LEDS_H_
 #define _CONTROLADOR_LEDS_H_
 
-bool Par(int n){
-    return n % 2 == 0 ? 1 : 0;
-}
-
 class ControladorLeds{
-    private:
+    protected:
         int inicio, fim, meio, tempoEspera;
         bool naoPar;
     public:
@@ -29,6 +25,7 @@ class ControladorLeds{
         }
         void IniciarPinos();
         void Acender(int funcao);
+	  bool Par(int n);
 };
 
 #endif

@@ -2,12 +2,16 @@
 
 #include "ControladorLeds.h"
 
-void ControladorLeds::IniciarPinos(){
+bool ControladorLeds :: Par(int n){
+    return n % 2 == 0 ? 1 : 0;
+}
+
+void ControladorLeds :: IniciarPinos(){
     for(int i = inicio; i < fim + 1; i++)
         pinMode(i,OUTPUT);
 }
 
-void ControladorLeds::Acender(int funcao){
+void ControladorLeds :: Acender(int funcao){
     int i;
     //1 - Inicio -> Meio
     //2 - Inicio <- Meio
