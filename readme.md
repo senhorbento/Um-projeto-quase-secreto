@@ -1,7 +1,7 @@
 # Um projeto quase secreto
 
-#Requirements
-##Libs:
+## Requirements  
+### Libs:
 
 [Network_Lib](https://github.com/senhorbento/Network_Lib)
 
