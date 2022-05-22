@@ -1,21 +1,21 @@
-#include <NetworkUNO.h>
+#include <Wire.h>
+
 #include <ControladorLeds.h>
 
-#define _ENDERECO_LOCAL_ 0
 #define _INICIO_         10
 #define _FIM_            13
-#define _DELAY_          1000
+#define _DELAY_          2000
 
-NetworkUNO network;
 ControladorLeds leds (_INICIO_,_FIM_,_DELAY_);
 
+int qtd;
+
 void setup(){
-  network.IniciarComunicacao();
-  network.SetEnderecoLocal(_ENDERECO_LOCAL_);
+  Wire.begin();
   for(int i = 2; i < 7; i++)
     pinMode(i, INPUT_PULLUP);
 }
-int qtd = 1;
+
 void loop(){
   int aux = 0;
 
@@ -37,13 +37,17 @@ void loop(){
       if(digitalRead(i) == HIGH)
         aux++;
     }
+    
+    
     if(qtd % 2 == 0)
-      network.EscreverMensagem(_ENDERECO_LOCAL_, 2, aux,0);
+      Wire.beginTransmission(2);
     else
-      network.EscreverMensagem(_ENDERECO_LOCAL_, 1, aux,0);
-    network.EnviarMensagem();
+      Wire.beginTransmission(1);
+    Wire.write(aux);
+    Wire.endTransmission();
     qtd++;
     delay(_DELAY_);
   }
+  
   
 }
