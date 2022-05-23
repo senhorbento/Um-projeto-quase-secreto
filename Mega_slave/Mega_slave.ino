@@ -5,7 +5,7 @@
 #define _ENDERECO_LOCAL_ 1
 #define _INICIO_         50
 #define _FIM_            53
-#define _DELAY_          1000
+#define _DELAY_          300
 
 ControladorLeds *leds = new ControladorLeds(_INICIO_,_FIM_,_DELAY_);
 

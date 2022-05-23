@@ -4,11 +4,18 @@
 
 #define _INICIO_         10
 #define _FIM_            13
-#define _DELAY_          2000
+#define _DELAY_          3600
 
-ControladorLeds leds (_INICIO_,_FIM_,_DELAY_);
-
-int qtd;
+void VaiVem(int linha){
+    Wire.beginTransmission(linha);
+    Wire.write(2);
+    Wire.endTransmission();
+    delay(_DELAY_);  
+    Wire.beginTransmission(2);
+    Wire.write(3);
+    Wire.endTransmission();
+    delay(_DELAY_);
+}
 
 void setup(){
   Wire.begin();
@@ -17,37 +24,6 @@ void setup(){
 }
 
 void loop(){
-  int aux = 0;
-
-  for(int i = 2; i < 6; i++){
-    if (digitalRead(i) == LOW){
-      if(digitalRead(i+8) == LOW){
-        digitalWrite(i+8, HIGH);
-        delay(300);
-      }
-      else{
-        digitalWrite(i+8, LOW);
-        delay(300);
-      }
-    }
-  }
-
-  if (digitalRead(6) == LOW){
-    for(int i = 10; i < 14; i++){
-      if(digitalRead(i) == HIGH)
-        aux++;
-    }
-    
-    
-    if(qtd % 2 == 0)
-      Wire.beginTransmission(2);
-    else
-      Wire.beginTransmission(1);
-    Wire.write(aux);
-    Wire.endTransmission();
-    qtd++;
-    delay(_DELAY_);
-  }
-  
-  
+    for(int i = 0; i < 5 ; i++)
+        VaiVem(i);
 }
