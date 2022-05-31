@@ -45,6 +45,9 @@ void ControladorLeds :: Acender(int funcao){
     //4 - Meio <- Fim
     //5 - Inicio -> Fim
     //6 - Inicio <- Fim
+    //7 - Todo Inicio -> Meio
+    //8 - Todos Meio -> Fim
+    //9 - Todos
     switch (funcao){
     case 1:
         if(naoPar)
@@ -125,6 +128,31 @@ void ControladorLeds :: Acender(int funcao){
             delay(tempoEspera);      
         }
         digitalWrite(i+1,LOW);
+    case 7:
+        if(naoPar)
+            meio--;
+        for(i = inicio; i < meio + 1; i++)
+            digitalWrite(i,HIGH);     
+        delay(tempoEspera * i); 
+        for(i = inicio; i < meio + 1; i++)
+            digitalWrite(i,LOW); 
+        if(naoPar)
+            meio++;
+        break;
+    case 8:
+        for(i = meio; i < fim + 1; i++)
+            digitalWrite(i,HIGH);
+        delay(tempoEspera * i);      
+        for(i = meio; i < fim + 1; i++)
+            digitalWrite(i,LOW);
+        break;
+    case 9:
+        for(i = inicio; i < fim + 1; i++)
+            digitalWrite(i,HIGH);
+        delay(tempoEspera * i);      
+        for(i = inicio; i < fim + 1; i++)
+            digitalWrite(i,LOW);
+        break;
     default:
         break;
     }
